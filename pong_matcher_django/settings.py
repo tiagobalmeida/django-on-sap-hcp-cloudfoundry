@@ -65,14 +65,17 @@ url = urlparse(
             'mysql2://djangopong:djangopong@127.0.0.1:3306/pong_matcher_django_development'
             )
         )
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': url.path[1:],
-        'USER': url.username,
-        'PASSWORD': url.password,
-        'HOST': url.hostname,
-        'PORT': url.port,
+	'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(PROJECT_DIR, 'data.db'),
+        #'ENGINE': 'django.db.backends.mysql',
+        #'NAME': url.path[1:],
+        #'USER': url.username,
+        #'PASSWORD': url.password,
+        #'HOST': url.hostname,
+        #'PORT': url.port,
     }
 }
 
