@@ -1,5 +1,5 @@
 """
-Django settings for pong_matcher_django project.
+Django settings for tasks_django project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'pongmatcher',
+    'tasks',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -50,21 +50,16 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'pong_matcher_django.urls'
+ROOT_URLCONF = 'tasks_django.urls'
 
-WSGI_APPLICATION = 'pong_matcher_django.wsgi.application'
+WSGI_APPLICATION = 'tasks_django.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 from urllib.parse import urlparse
-url = urlparse(
-        os.environ.get(
-            'DATABASE_URL',
-            'mysql2://djangopong:djangopong@127.0.0.1:3306/pong_matcher_django_development'
-            )
-        )
+
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Get config from env variable VCAP_SERVICES (CF specific)
