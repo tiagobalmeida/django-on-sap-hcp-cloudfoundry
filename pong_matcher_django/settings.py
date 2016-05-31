@@ -66,18 +66,30 @@ url = urlparse(
             )
         )
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
-DATABASES = {
-    'default': {
-	'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_DIR, 'data.db'),
-        #'ENGINE': 'django.db.backends.mysql',
-        #'NAME': url.path[1:],
-        #'USER': url.username,
-        #'PASSWORD': url.password,
-        #'HOST': url.hostname,
-        #'PORT': url.port,
+
+# Get config from env variable VCAP_SERVICES (CF specific)
+import json
+if 'VCAP_SERVICES' in os.environ:
+    vcap_services = json.loads(os.environ['VCAP_SERVICES'])
+    db_credentials = vcap_services['postgresql'][0]['credentials']
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': db_credentials['dbname'],
+            'USER': db_credentials['username'],
+            'PASSWORD': db_credentials['password'],
+            'HOST': db_credentials['hostname'],
+            'PORT': db_credentials['port']
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'mydatabase'
+        }
+    }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

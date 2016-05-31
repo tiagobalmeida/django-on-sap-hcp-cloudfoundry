@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Django on SAP Cloud</title>
+  <meta name="description" content="Django on SAP cloud">
+
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <ul>
+    <form action="{% url 'tasks:index' %}" method="post">
+      {% csrf_token %}
+      <label for="id_description">New Task:</label><br />
+      <input type="text" name="description" id="id_description" />
+      <input type="submit" value="Save" />
+    </form>
+    {% for task in tasks %}
+    <li>{{task.description}}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

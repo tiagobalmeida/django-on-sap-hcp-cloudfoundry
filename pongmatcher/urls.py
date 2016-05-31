@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from pongmatcher import views
-
+app_name = 'tasks'
 urlpatterns = [
-        url(r'^hello$', views.hello)
+        url(r'^$', views.index, name="index")
 ]
